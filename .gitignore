@@ -1,8 +1,13 @@
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
+<<<<<<< HEAD
 [Bb]uild/
 [Bb]in/
+=======
+[Bb]in/
+[Bb]uild/
+>>>>>>> 12c568481f052ceb2ac8497458e4ed5324ff08c4
 [Bb]uilds/
 [Ll]ogs/
 
