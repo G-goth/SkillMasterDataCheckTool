@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using ClosedXML.Excel;
 
@@ -6,21 +7,17 @@ namespace GlareBattleTestSupportTool
 {
     class IOExcelFiles
     {
-        public int ExcelWorkSheetNumberProp{ set; get; }
-        public XLWorkbook ExcelWorkBookProp{ set; get; }
-
         private int GetUsedCellRowCount(int sheetNumber, XLWorkbook workBook)
         {
             var workSheet = workBook.Worksheet(sheetNumber);
-            // var workSheet = ExcelWorkBookProp.Worksheet(ExcelWorkSheetNumberProp);
             return workSheet.LastColumnUsed().ColumnNumber();
         }
         private int GetUsedCellColumnCount(int sheetNumber, XLWorkbook workBook)
         {
             var workSheet = workBook.Worksheet(sheetNumber);
-            // var workSheet = ExcelWorkBookProp.Worksheet(ExcelWorkSheetNumberProp);
             return workSheet.LastRowUsed().RowNumber();
         }
+
         private int GetExcelSheetNumber(string fileName)
         {
             int workSheetNumber;
@@ -53,37 +50,18 @@ namespace GlareBattleTestSupportTool
                 }
             }
         }
-        // public (int sheetNumber, XLWorkbook workBook) GetXLWorkBookTupleObject(string fileName)
-        // {
-        //     using(var workBook = new XLWorkbook(@"" + fileName))
-        //     {
-        //         try
-        //         {
-        //             return;
-        //         }
-        //         catch(System.Exception e)
-        //         {
-        //             Console.WriteLine(e);
-        //             return
-        //         }
-        //     }
-        // }
 
-        public List<string> ExtractionExcelData(int sheetNumber, XLWorkbook workBook)
+        public string[,] ExtractionExcelData(int sheetNumber, XLWorkbook workBook)
         {
-            (int x, int y) xlCellAddress;
             var workSheet = workBook.Worksheet(sheetNumber);
-            xlCellAddress.x = workSheet.LastColumnUsed().ColumnNumber();
-            xlCellAddress.y = workSheet.LastRowUsed().RowNumber();
+            (int column, int row) xlCellAddress;
+            xlCellAddress.column = workSheet.LastColumnUsed().ColumnNumber();
+            xlCellAddress.row = workSheet.LastRowUsed().RowNumber();
+            string[,] excelRowStr = new string[xlCellAddress.row, xlCellAddress.column];
 
-            var columnCount = workSheet.LastColumnUsed().ColumnNumber();
-            var rowCount = workSheet.LastRowUsed().RowNumber();
-            string[,] excelRowStr = new string[rowCount, columnCount];
-            List<string> excelCellData = new List<string>();
-
-            for(int row = 0; row < rowCount; ++row)
+            for(int row = 0; row < xlCellAddress.row; ++row)
             {
-                for(int column = 0; column < columnCount; ++column)
+                for(int column = 0; column < xlCellAddress.column; ++column)
                 {
                     excelRowStr[row,column] = workSheet.Cell(row + 1, column + 1).Value.ToString();
                     //Console.WriteLine("dataList[{0}, {1}] : {2}", row, column, excelRowStr[row, column]);
@@ -91,7 +69,7 @@ namespace GlareBattleTestSupportTool
                 //Console.WriteLine();
             }
             workBook.Dispose();
-            return excelCellData;
+            return excelRowStr;
         }
     }
 }
