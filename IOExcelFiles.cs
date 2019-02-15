@@ -51,25 +51,33 @@ namespace GlareBattleTestSupportTool
             }
         }
 
-        public string[,] ExtractionExcelData(int sheetNumber, XLWorkbook workBook)
+        private string[,] GetExcelUsedTwoDimensionsArray(int sheetNumber, XLWorkbook workBook)
         {
             var workSheet = workBook.Worksheet(sheetNumber);
             (int column, int row) xlCellAddress;
             xlCellAddress.column = workSheet.LastColumnUsed().ColumnNumber();
             xlCellAddress.row = workSheet.LastRowUsed().RowNumber();
-            string[,] excelRowStr = new string[xlCellAddress.row, xlCellAddress.column];
+            string[,] xlUsedSheetAddress = new string[xlCellAddress.row, xlCellAddress.column];
 
-            for(int row = 0; row < xlCellAddress.row; ++row)
+            return xlUsedSheetAddress;
+        }
+        
+        public string[,] ExtractionExcelData(XLWorkbook workBook)
+        {
+            var workSheet = workBook.Worksheet(1);
+            string[,] xlRowStrArray = GetExcelUsedTwoDimensionsArray(1, workBook);
+
+            for(int row = 0; row < xlRowStrArray.GetLength(0); ++row)
             {
-                for(int column = 0; column < xlCellAddress.column; ++column)
+                for(int column = 0; column < xlRowStrArray.GetLength(1); ++column)
                 {
-                    excelRowStr[row,column] = workSheet.Cell(row + 1, column + 1).Value.ToString();
-                    //Console.WriteLine("dataList[{0}, {1}] : {2}", row, column, excelRowStr[row, column]);
+                    xlRowStrArray[row,column] = workSheet.Cell(row + 1, column + 1).Value.ToString();
+                    Console.WriteLine("dataList[{0}, {1}] : {2}", row, column, xlRowStrArray[row, column]);
                 }
-                //Console.WriteLine();
+                Console.WriteLine();
             }
             workBook.Dispose();
-            return excelRowStr;
+            return xlRowStrArray;
         }
     }
 }

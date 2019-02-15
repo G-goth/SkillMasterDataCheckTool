@@ -15,7 +15,7 @@ namespace GlareBattleTestSupportTool
             fileFullPath.AddRange(iof.GetSpecifiedExtensionFileFullPath("xlsx"));
             foreach(var item in fileFullPath)
             {
-                ioe.ExtractionExcelData(1, ioe.GetExcelObject(item));
+                ioe.ExtractionExcelData(ioe.GetExcelObject(item));
             }
         }
     }
