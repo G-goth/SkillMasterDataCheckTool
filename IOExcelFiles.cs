@@ -3,81 +3,78 @@ using System.Linq;
 using System.Collections.Generic;
 using ClosedXML.Excel;
 
-namespace GlareBattleTestSupportTool
+class IOExcelFiles
 {
-    class IOExcelFiles
+    private int GetUsedCellRowCount(int sheetNumber, XLWorkbook workBook)
     {
-        private int GetUsedCellRowCount(int sheetNumber, XLWorkbook workBook)
-        {
-            var workSheet = workBook.Worksheet(sheetNumber);
-            return workSheet.LastColumnUsed().ColumnNumber();
-        }
-        private int GetUsedCellColumnCount(int sheetNumber, XLWorkbook workBook)
-        {
-            var workSheet = workBook.Worksheet(sheetNumber);
-            return workSheet.LastRowUsed().RowNumber();
-        }
+        var workSheet = workBook.Worksheet(sheetNumber);
+        return workSheet.LastColumnUsed().ColumnNumber();
+    }
+    private int GetUsedCellColumnCount(int sheetNumber, XLWorkbook workBook)
+    {
+        var workSheet = workBook.Worksheet(sheetNumber);
+        return workSheet.LastRowUsed().RowNumber();
+    }
 
-        private int GetExcelSheetNumber(string fileName)
+    private int GetExcelSheetNumber(string fileName)
+    {
+        int workSheetNumber;
+        using(var workBook = new XLWorkbook(@"" + fileName))
         {
-            int workSheetNumber;
-            using(var workBook = new XLWorkbook(@"" + fileName))
+            try
             {
-                try
-                {
-                    workSheetNumber = workBook.Worksheets.Count;
-                }
-                catch
-                {
-                    return 0;
-                }
+                workSheetNumber = workBook.Worksheets.Count;
             }
-            return workSheetNumber;
-        }
-
-        public XLWorkbook GetExcelObject(string fileName)
-        {
-            using(var workBook = new XLWorkbook(@"" + fileName))
+            catch
             {
-                try
-                {
-                    return workBook;
-                }
-                catch(System.Exception e)
-                {
-                    Console.WriteLine(e);
-                    return workBook;
-                }
+                return 0;
             }
         }
+        return workSheetNumber;
+    }
 
-        private string[,] GetExcelUsedTwoDimensionsArray(int sheetNumber, XLWorkbook workBook)
+    public XLWorkbook GetExcelObject(string fileName)
+    {
+        using(var workBook = new XLWorkbook(@"" + fileName))
         {
-            var workSheet = workBook.Worksheet(sheetNumber);
-            (int column, int row) xlCellAddress;
-            xlCellAddress.column = workSheet.LastColumnUsed().ColumnNumber();
-            xlCellAddress.row = workSheet.LastRowUsed().RowNumber();
-            string[,] xlUsedSheetAddress = new string[xlCellAddress.row, xlCellAddress.column];
-
-            return xlUsedSheetAddress;
-        }
-        
-        public string[,] ExtractionExcelData(XLWorkbook workBook)
-        {
-            var workSheet = workBook.Worksheet(1);
-            string[,] xlRowStrArray = GetExcelUsedTwoDimensionsArray(1, workBook);
-
-            for(int row = 0; row < xlRowStrArray.GetLength(0); ++row)
+            try
             {
-                for(int column = 0; column < xlRowStrArray.GetLength(1); ++column)
-                {
-                    xlRowStrArray[row,column] = workSheet.Cell(row + 1, column + 1).Value.ToString();
-                    Console.WriteLine("dataList[{0}, {1}] : {2}", row, column, xlRowStrArray[row, column]);
-                }
-                Console.WriteLine();
+                return workBook;
             }
-            workBook.Dispose();
-            return xlRowStrArray;
+            catch(System.Exception e)
+            {
+                Console.WriteLine(e);
+                return workBook;
+            }
         }
+    }
+
+    private string[,] GetExcelUsedTwoDimensionsArray(int sheetNumber, XLWorkbook workBook)
+    {
+        var workSheet = workBook.Worksheet(sheetNumber);
+        (int column, int row) xlCellAddress;
+        xlCellAddress.column = workSheet.LastColumnUsed().ColumnNumber();
+        xlCellAddress.row = workSheet.LastRowUsed().RowNumber();
+        string[,] xlUsedSheetAddress = new string[xlCellAddress.row, xlCellAddress.column];
+
+        return xlUsedSheetAddress;
+    }
+
+    public string[,] ExtractionExcelData(XLWorkbook workBook)
+    {
+        var workSheet = workBook.Worksheet(1);
+        string[,] xlRowStrArray = GetExcelUsedTwoDimensionsArray(1, workBook);
+
+        for(int row = 0; row < xlRowStrArray.GetLength(0); ++row)
+        {
+            for(int column = 0; column < xlRowStrArray.GetLength(1); ++column)
+            {
+                xlRowStrArray[row,column] = workSheet.Cell(row + 1, column + 1).Value.ToString();
+                Console.WriteLine("dataList[{0}, {1}] : {2}", row, column, xlRowStrArray[row, column]);
+            }
+            Console.WriteLine();
+        }
+        workBook.Dispose();
+        return xlRowStrArray;
     }
 }
