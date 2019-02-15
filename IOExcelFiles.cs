@@ -33,6 +33,11 @@ class IOExcelFiles
         return workSheetNumber;
     }
 
+    /// <summary>
+    /// ClosedXMLでExcelワークブックを取得する
+    /// </summary>
+    /// <param name="fileName">ファイル名(拡張子まで)</param>
+    /// <returns>XLWorkbook型変数</returns>
     public XLWorkbook GetExcelObject(string fileName)
     {
         using(var workBook = new XLWorkbook(@"" + fileName))
@@ -60,9 +65,14 @@ class IOExcelFiles
         return xlUsedSheetAddress;
     }
 
-    public string[,] ExtractionExcelData(XLWorkbook workBook)
+    /// <summary>
+    /// Excelのデータをセルごとに読み込んで2次元配列に代入する
+    /// </summary>
+    /// <param name="workBook">XLWorkbook変数</param>
+    /// <returns>使用しているExcelのセルのデータをstringの2次元配列で返す</returns>
+    public string[,] ExtractionExcelData(int sheetNumber, XLWorkbook workBook)
     {
-        var workSheet = workBook.Worksheet(1);
+        var workSheet = workBook.Worksheet(sheetNumber);
         string[,] xlRowStrArray = GetExcelUsedTwoDimensionsArray(1, workBook);
 
         for(int row = 0; row < xlRowStrArray.GetLength(0); ++row)
@@ -70,9 +80,9 @@ class IOExcelFiles
             for(int column = 0; column < xlRowStrArray.GetLength(1); ++column)
             {
                 xlRowStrArray[row,column] = workSheet.Cell(row + 1, column + 1).Value.ToString();
-                Console.WriteLine("dataList[{0}, {1}] : {2}", row, column, xlRowStrArray[row, column]);
+                // Console.WriteLine("dataList[{0}, {1}] : {2}", row, column, xlRowStrArray[row, column]);
             }
-            Console.WriteLine();
+            // Console.WriteLine();
         }
         workBook.Dispose();
         return xlRowStrArray;
