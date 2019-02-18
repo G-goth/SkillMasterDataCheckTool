@@ -54,4 +54,11 @@ class IOFileName
         
         return relativePath.Substring(separateFilename);
     }
+
+    public List<string> GetSpecifiedExtensionFileNameToList(List<string> fileFullPath)
+    {
+        List<string> fileFullPathList = new List<string>();
+        var linqTest = fileFullPath.Select(fileName => fileName);
+        return fileFullPathList;
+    }
 }
