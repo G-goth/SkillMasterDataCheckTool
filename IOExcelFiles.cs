@@ -16,7 +16,7 @@ class IOExcelFiles
         return workSheet.LastRowUsed().RowNumber();
     }
 
-    private int GetExcelSheetNumber(string fileName)
+    public int GetExcelSheetNumber(string fileName)
     {
         int workSheetNumber;
         using(var workBook = new XLWorkbook(@"" + fileName))
