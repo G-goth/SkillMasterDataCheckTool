@@ -12,13 +12,10 @@ class MainClass
         List<string> fileFullPath = new List<string>();
         fileFullPath.AddRange(iof.GetSpecifiedExtensionFileFullPath("xlsx"));
 
+        List<string[,]> XLDataList = new List<string[,]>();
         for(int sheetCount = 1; sheetCount <= fileFullPath.Count; ++sheetCount)
         {
-            ioe.ExtractionExcelData(sheetCount, ioe.GetExcelObject(fileFullPath[sheetCount -1]));
+            XLDataList.Add(ioe.ExtractionExcelData(sheetCount, ioe.GetExcelObject(fileFullPath[sheetCount -1])));
         }
-        // foreach(var item in fileFullPath)
-        // {
-        //     ioe.ExtractionExcelData(1, ioe.GetExcelObject(item));
-        // }
     }
 }
