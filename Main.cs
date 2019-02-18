@@ -14,12 +14,19 @@ class MainClass
         // ファイルのフルパスの取得
         List<string> fileFullPath = new List<string>();
         fileFullPath.AddRange(iof.GetSpecifiedExtensionFileFullPath("xlsx"));
+        Console.WriteLine(iof.GetSpecifiedExtensionFileName(fileFullPath[0]));
+        // LINQ Test
         // ファイル名の取得
         List<string> fileNameList = new List<string>();
-        foreach(var fileName in fileFullPath)
+        fileNameList.AddRange(iof.GetSpecifiedExtensionFileNameToList(fileFullPath));
+        foreach(var item in fileNameList)
         {
-            fileNameList.Add(iof.GetSpecifiedExtensionFileName(fileName));
+            Console.WriteLine(item);
         }
+        // foreach(var fileName in fileFullPath)
+        // {
+        //     fileNameList.Add(iof.GetSpecifiedExtensionFileName(fileName));
+        // }
 
         List<XLWorkbook> workBookList = new List<XLWorkbook>();
         List<string[,]> XLDataList = new List<string[,]>();
