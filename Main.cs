@@ -7,6 +7,12 @@ class MainClass
 {
     static void Main(string[] args)
     {
+        // LINQ Test
+        List<string> testStrList = new List<string>(){"1st", "2nd", "3rd"};
+        // var linqTest = testStrList.Select((testStrList) => str.Add(""));
+        string[] fruits = { "apple", "banana", "mango", "orange", "passionfruit", "grape" };
+        var query = fruits.Select((fruit, index) => new { index, str = fruit.Substring(0, index) });
+
         IOCSV io = new IOCSV();
         IOFileName iof = new IOFileName();
         IOExcelFiles ioe = new IOExcelFiles();
@@ -14,19 +20,11 @@ class MainClass
         // ファイルのフルパスの取得
         List<string> fileFullPath = new List<string>();
         fileFullPath.AddRange(iof.GetSpecifiedExtensionFileFullPath("xlsx"));
-        Console.WriteLine(iof.GetSpecifiedExtensionFileName(fileFullPath[0]));
-        // LINQ Test
         // ファイル名の取得
-        List<string> fileNameList = new List<string>();
-        fileNameList.AddRange(iof.GetSpecifiedExtensionFileNameToList(fileFullPath));
-        foreach(var item in fileNameList)
+        foreach(var fileName in iof.GetSpecifiedExtensionFileNameToList(fileFullPath))
         {
-            Console.WriteLine(item);
+            Console.WriteLine(fileName);
         }
-        // foreach(var fileName in fileFullPath)
-        // {
-        //     fileNameList.Add(iof.GetSpecifiedExtensionFileName(fileName));
-        // }
 
         List<XLWorkbook> workBookList = new List<XLWorkbook>();
         List<string[,]> XLDataList = new List<string[,]>();

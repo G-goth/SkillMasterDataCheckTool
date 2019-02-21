@@ -55,10 +55,31 @@ class IOFileName
         return relativePath.Substring(separateFilename);
     }
 
-    public List<string> GetSpecifiedExtensionFileNameToList(List<string> fileFullPath)
+    /// <summary>
+    /// ファイルのフルパスから拡張子付きファイル名をListで取得
+    /// </summary>
+    /// <param name="fileFullPathList">ファイル名のList</param>
+    /// <returns>ファイル名の相対パス</returns>
+    public List<string> GetSpecifiedExtensionFileNameToList(List<string> fileFullPathList)
     {
-        List<string> fileFullPathList = new List<string>();
-        var linqTest = fileFullPath.Select(fileName => fileName);
-        return fileFullPathList;
+        // 得られた絶対パスをUriコンストラクタに値を入れてList初期化
+        var dir = System.Environment.CurrentDirectory;
+        Uri u1 = new Uri(dir);
+        List<Uri> u2List = new List<Uri>();
+        foreach(var filePath in fileFullPathList)
+        {
+            u2List = new List<Uri>(){new Uri(filePath)};
+        }
+
+        // 得られた絶対パスのリストごとに相対パスを作ってリストに入れる
+        List<string> relativePathList = new List<string>();
+        foreach(var u2 in u2List)
+        {
+            Uri relativeUri = u1.MakeRelativeUri(u2);
+            string relativePath = relativeUri.ToString();
+            int separateFilename = relativePath.IndexOf("/") + 1;
+            relativePathList.Add(relativePath.Substring(separateFilename));
+        }
+        return relativePathList;
     }
 }
