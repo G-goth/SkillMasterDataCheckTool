@@ -7,6 +7,12 @@ class MainClass
 {
     static void Main(string[] args)
     {
+        // LINQ Test
+        List<string> testStrList = new List<string>(){"1st", "2nd", "3rd"};
+        // var linqTest = testStrList.Select((testStrList) => str.Add(""));
+        string[] fruits = { "apple", "banana", "mango", "orange", "passionfruit", "grape" };
+        var query = fruits.Select((fruit, index) => new { index, str = fruit.Substring(0, index) });
+
         IOCSV io = new IOCSV();
         IOFileName iof = new IOFileName();
         IOExcelFiles ioe = new IOExcelFiles();
