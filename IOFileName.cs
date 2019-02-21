@@ -55,6 +55,11 @@ class IOFileName
         return relativePath.Substring(separateFilename);
     }
 
+    /// <summary>
+    /// ファイルのフルパスから拡張子付きファイル名をListで取得
+    /// </summary>
+    /// <param name="fileFullPathList">ファイル名のList</param>
+    /// <returns>ファイル名の相対パス</returns>
     public List<string> GetSpecifiedExtensionFileNameToList(List<string> fileFullPathList)
     {
         // 得られた絶対パスをUriコンストラクタに値を入れてList初期化
