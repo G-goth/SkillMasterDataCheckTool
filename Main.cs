@@ -7,13 +7,6 @@ class MainClass
 {
     static void Main(string[] args)
     {
-        // LINQ Test
-        List<string> sf3 = new List<string>(){"1st", "2nd", "3rd"};
-        string[] fruits = { "apple", "banana", "mango", "orange", "passionfruit", "grape" };
-        var query = fruits.Select((fruit, index) => new { index, str = fruit.Substring(0, index) });
-        var sfQuery = sf3.Select(title => "sf3 " + title);
-        Console.WriteLine(Enumerable.Repeat(sf3, sf3.Count));
-
         IOCSV io = new IOCSV();
         IOFileName iof = new IOFileName();
         IOExcelFiles ioe = new IOExcelFiles();
