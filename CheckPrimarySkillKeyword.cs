@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 interface ICheckSkillMisMatch
 {
-    void CheckSkillOverLap(string[,] skillDataList);
+    void CheckSkillOverLapping(string[,] skillDataList);
     void CheckSkillBlank(string[,] skillDataList);
-    void CheckSkillFullWidthHalfWidth(string[,] skillDataList);
+    void CheckSkillFullWidth(string[,] skillDataList);
 }
 
 class CheckPrimarySkillKeyword : ICheckSkillMisMatch
 {
-    public void CheckSkillOverLap(string[,] skillDataList)
+    public void CheckSkillOverLapping(string[,] skillDataList)
     {}
     public void CheckSkillBlank(string[,] skillDataList)
     {}
-    public void CheckSkillFullWidthHalfWidth(string[,] skillDataList)
+    public void CheckSkillFullWidth(string[,] skillDataList)
     {}
 }
