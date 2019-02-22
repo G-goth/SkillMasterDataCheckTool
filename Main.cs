@@ -14,9 +14,10 @@ class MainClass
         // ファイルのフルパスの取得
         List<string> fileFullPath = new List<string>();
         fileFullPath.AddRange(iof.GetSpecifiedExtensionFileFullPath("xlsx"));
+        // Excelファイルの最大シート数を取得
+        int maxSheetNumber = ioe.GetExcelSheetNumberMax(fileFullPath[0]);
         // Excelファイルのシート数を連番で取得
         List<int> serialNumber = new List<int>(ioe.GetExcelSheetNumberList(fileFullPath[0]));
-        Console.WriteLine(serialNumber[0]);
 
         List<XLWorkbook> workBookList = new List<XLWorkbook>();
         List<string[,]> XLDataList = new List<string[,]>();

@@ -54,13 +54,11 @@ class IOExcelFiles : IIOExcelFiles
     public List<int> GetExcelSheetNumberList(string fileName)
     {
         List<int> serialNumber = new List<int>();
-        int workSheetNumber;
         using(var workBook = new XLWorkbook(@"" + fileName))
         {
             try
             {
-                workSheetNumber = workBook.Worksheets.Count;
-                serialNumber.AddRange(Enumerable.Repeat(1, workSheetNumber).ToList());
+                serialNumber.AddRange(Enumerable.Repeat(1, workBook.Worksheets.Count).ToList());
             }
             catch(System.Exception e)
             {
