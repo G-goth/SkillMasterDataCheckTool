@@ -3,7 +3,16 @@ using System.Linq;
 using System.Collections.Generic;
 using ClosedXML.Excel;
 
-class IOExcelFiles
+interface IIOExcelFiles
+{
+    List<int> GetExcelSheetNumberList(string fileName);
+    int GetExcelSheetNumberMax(string fileName);
+    string[,] ExtractionExcelData(int sheetNumber, XLWorkbook workBook);
+    // ClosedXML
+    XLWorkbook GetExcelObject(string fileName);
+}
+
+class IOExcelFiles : IIOExcelFiles
 {
     private int GetUsedCellRowCount(int sheetNumber, XLWorkbook workBook)
     {
@@ -16,21 +25,50 @@ class IOExcelFiles
         return workSheet.LastRowUsed().RowNumber();
     }
 
-    public int GetExcelSheetNumber(string fileName)
+    /// <summary>
+    /// 取得したExcelファイルの最大シート数
+    /// </summary>
+    /// <param name="fileName">Excelファイル名</param>
+    /// <returns>最大シート数</returns>
+    public int GetExcelSheetNumberMax(string fileName)
     {
+        try
+        {
+            using(var workBook = new XLWorkbook(@"" + fileName))
+            {
+                return workBook.Worksheets.Count;
+            }
+        }
+        catch(System.Exception e)
+        {
+            Console.WriteLine(e);
+            return 0;
+        }
+    }
+
+    /// <summary>
+    /// 取得したExcelファイルのシート数を連番でListに登録して返す
+    /// </summary>
+    /// <param name="fileName">Excelファイル名</param>
+    /// <returns>連番の入ったList</returns>
+    public List<int> GetExcelSheetNumberList(string fileName)
+    {
+        List<int> serialNumber = new List<int>();
         int workSheetNumber;
         using(var workBook = new XLWorkbook(@"" + fileName))
         {
             try
             {
                 workSheetNumber = workBook.Worksheets.Count;
+                serialNumber.AddRange(Enumerable.Repeat(1, workSheetNumber).ToList());
             }
-            catch
+            catch(System.Exception e)
             {
-                return 0;
+                Console.WriteLine(e);
+                return serialNumber;
             }
         }
-        return workSheetNumber;
+        return serialNumber;
     }
 
     /// <summary>
