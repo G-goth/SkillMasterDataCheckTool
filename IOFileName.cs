@@ -63,14 +63,12 @@ class IOFileName
     public List<string> GetSpecifiedExtensionFileNameToList(List<string> fileFullPathList)
     {
         // 得られた絶対パスをUriコンストラクタに値を入れてList初期化
-        var dir = System.Environment.CurrentDirectory;
-        Uri u1 = new Uri(dir);
+        Uri u1 = new Uri(System.Environment.CurrentDirectory);
         List<Uri> u2List = new List<Uri>();
         foreach(var filePath in fileFullPathList)
         {
-            u2List = new List<Uri>(){new Uri(filePath)};
+            u2List.Add(new Uri(filePath));
         }
-
         // 得られた絶対パスのリストごとに相対パスを作ってリストに入れる
         List<string> relativePathList = new List<string>();
         foreach(var u2 in u2List)
