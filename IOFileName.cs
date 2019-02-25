@@ -69,14 +69,6 @@ class IOFileName
 
         // 得られた絶対パスのリストごとに相対パスを作ってリストに入れる
         List<string> relativePathList = new List<string>();
-        relativePathList = u2List.Select(u2 => u1.MakeRelativeUri(u2).ToString().Substring(u1.MakeRelativeUri(u2).ToString().IndexOf("/") + 1)).ToList();
-        // foreach(var u2 in u2List)
-        // {
-        //     Uri relativeUri = u1.MakeRelativeUri(u2);
-        //     string relativePath = relativeUri.ToString();
-        //     int separateFilename = relativePath.IndexOf("/") + 1;
-        //     relativePathList.Add(relativePath.Substring(separateFilename));
-        // }
-        return relativePathList;
+        return relativePathList = u2List.Select(u2 => u1.MakeRelativeUri(u2).ToString().Substring(u1.MakeRelativeUri(u2).ToString().IndexOf("/") + 1)).ToList();
     }
 }
