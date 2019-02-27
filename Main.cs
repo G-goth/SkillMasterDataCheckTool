@@ -7,6 +7,9 @@ class MainClass
 {
     static void Main(string[] args)
     {
+        UtilityClass utility = new UtilityClass();
+        Console.WriteLine(utility.AdvancedRoundINT(095678, 2));
+        
         IOCSV io = new IOCSV();
         IOFileName iof = new IOFileName();
         IOExcelFiles ioe = new IOExcelFiles();
