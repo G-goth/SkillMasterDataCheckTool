@@ -9,7 +9,6 @@ interface IUtilityClass
 }
 public static class UtilityBaseClass
 {
-    static readonly int TEN = 10;
     public static bool ArgumentZeroCheck(this UtilityClass utility, int num, int dPointPosition)
     {
         // 数値の桁数よりも四捨五入する位置が大きかったらfalseを返す
