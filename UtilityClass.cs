@@ -7,9 +7,10 @@ interface IUtilityClass
     int AdvancedRoundINT(int num, int dPointPosition);
     List<int> GenerateSerialNumber(int startNum, int endNum);
 }
-public static class UtilityBaseClass
+public class UtilityClass : IUtilityClass
 {
-    public static bool ArgumentZeroCheck(this UtilityClass utility, int num, int dPointPosition)
+    static readonly int TEN = 10;
+    private bool ArgumentZeroCheck(int num, int dPointPosition)
     {
         // 数値の桁数よりも四捨五入する位置が大きかったらfalseを返す
         if(((int)Math.Log10(num) + 1) <= dPointPosition) return false;
@@ -18,14 +19,9 @@ public static class UtilityBaseClass
         // いずれもマッチしなかったらtrue
         return true;
     }
-}
-public class UtilityClass : IUtilityClass
-{
-    static readonly int TEN = 10;
     public int AdvancedRoundINT(int num, int dPointPosition)
     {
-        UtilityClass utility = new UtilityClass();
-        if(utility.ArgumentZeroCheck(num, dPointPosition) == false) return 0;
+        if(ArgumentZeroCheck(num, dPointPosition) == false) return 0;
         else
         {
             return (int)(Math.Round(num / Math.Pow(TEN, dPointPosition)) * Math.Pow(TEN, dPointPosition));
