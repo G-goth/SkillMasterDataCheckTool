@@ -7,7 +7,7 @@ interface IIOExcelFiles
 {
     List<int> GetExcelSheetNumberList(string fileName);
     int GetExcelSheetNumberMax(string fileName);
-    string[,] ExtractionExcelData(int sheetNumber, XLWorkbook workBook);
+    string[][] ExtractionExcelData(int sheetNumber, XLWorkbook workBook);
     // ClosedXML
     XLWorkbook GetExcelObject(string fileName);
 }
@@ -90,36 +90,27 @@ class IOExcelFiles : IIOExcelFiles
         }
     }
 
-    private string[,] GetExcelUsedTwoDimensionsArray(int sheetNumber, XLWorkbook workBook)
+    /// <summary>
+    /// Excelのデータをセルごとに読み込んで2次元配列に代入する
+    /// </summary>
+    /// <param name="sheetNumber">シート番号(1から)</param>
+    /// <param name="workBook">XLWorkbook変数</param>
+    /// <returns>使用しているExcelのセルのデータをstringのジャグ配列で返す</returns>
+    public string[][] ExtractionExcelData(int sheetNumber, XLWorkbook workBook)
     {
         var workSheet = workBook.Worksheet(sheetNumber);
         (int column, int row) xlCellAddress;
         xlCellAddress.column = workSheet.LastColumnUsed().ColumnNumber();
         xlCellAddress.row = workSheet.LastRowUsed().RowNumber();
-        return new string[xlCellAddress.row, xlCellAddress.column];
-    }
 
-    /// <summary>
-    /// Excelのデータをセルごとに読み込んで2次元配列に代入する
-    /// </summary>
-    /// <param name="workBook">XLWorkbook変数</param>
-    /// <returns>使用しているExcelのセルのデータをstringの2次元配列で返す</returns>
-    public string[,] ExtractionExcelData(int sheetNumber, XLWorkbook workBook)
-    {
-        var workSheet = workBook.Worksheet(sheetNumber);
-        string[,] xlRowStrArray = GetExcelUsedTwoDimensionsArray(1, workBook);
-        string[][] strJaggedTable = Enumerable.Range(0, 5).Select(y => (new string[10]).Select(x => "").ToArray()).ToArray();
-
-        for(int row = 0; row < xlRowStrArray.GetLength(0); ++row)
-        {
-            for(int column = 0; column < xlRowStrArray.GetLength(1); ++column)
-            {
-                xlRowStrArray[row,column] = workSheet.Cell(row + 1, column + 1).Value.ToString();
-                // Console.WriteLine("dataList[{0}, {1}] : {2}", row, column, xlRowStrArray[row, column]);
-            }
-            // Console.WriteLine();
-        }
-        workBook.Dispose();
-        return xlRowStrArray;
+        // ジャグ配列にExcelのセルのデータを入れる
+        string[][] xlStrDataArray = new string[xlCellAddress.row][];
+        xlStrDataArray = Enumerable.Range(0, xlCellAddress.column)
+            .Select(row => (new string[xlCellAddress.column]).Select(str => workSheet.Cell(1, 1).Value.ToString()).ToArray()).ToArray();
+        
+        string[][] xlStrDataArray2 = new string[xlCellAddress.row][];
+        Console.WriteLine(workSheet.Cell("A1").Value.ToString());
+        Console.WriteLine(xlStrDataArray[0][0]);
+        return xlStrDataArray;
     }
 }
