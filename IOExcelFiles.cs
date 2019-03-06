@@ -96,9 +96,7 @@ class IOExcelFiles : IIOExcelFiles
         (int column, int row) xlCellAddress;
         xlCellAddress.column = workSheet.LastColumnUsed().ColumnNumber();
         xlCellAddress.row = workSheet.LastRowUsed().RowNumber();
-        string[,] xlUsedSheetAddress = new string[xlCellAddress.row, xlCellAddress.column];
-
-        return xlUsedSheetAddress;
+        return new string[xlCellAddress.row, xlCellAddress.column];
     }
 
     /// <summary>
@@ -110,6 +108,7 @@ class IOExcelFiles : IIOExcelFiles
     {
         var workSheet = workBook.Worksheet(sheetNumber);
         string[,] xlRowStrArray = GetExcelUsedTwoDimensionsArray(1, workBook);
+        string[][] strJaggedTable = Enumerable.Range(0, 5).Select(y => (new string[10]).Select(x => "").ToArray()).ToArray();
 
         for(int row = 0; row < xlRowStrArray.GetLength(0); ++row)
         {
