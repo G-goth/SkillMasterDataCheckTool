@@ -14,16 +14,34 @@ interface IIOExcelFiles
 
 class IOExcelFiles : IIOExcelFiles
 {
-    private int GetUsedCellRowCount(int sheetNumber, XLWorkbook workBook)
+    public int ExcelSheetNumberProp{ set; get; }
+    public XLWorkbook ExcelObjectProp{ set; get; }
+    private int GetUsedCellRowCountProp
     {
-        var workSheet = workBook.Worksheet(sheetNumber);
-        return workSheet.LastColumnUsed().ColumnNumber();
+        get
+        {
+            var workSheet = ExcelObjectProp.Worksheet(ExcelSheetNumberProp);
+            return workSheet.LastColumnUsed().ColumnNumber();
+        }
     }
-    private int GetUsedCellColumnCount(int sheetNumber, XLWorkbook workBook)
+    private int GetUsedCellColumnCountProp
     {
-        var workSheet = workBook.Worksheet(sheetNumber);
-        return workSheet.LastRowUsed().RowNumber();
+        get
+        {
+            var workSheet = ExcelObjectProp.Worksheet(ExcelSheetNumberProp);
+            return workSheet.LastRowUsed().RowNumber();
+        }
     }
+    // private int GetUsedCellRowCount(int sheetNumber, XLWorkbook workBook)
+    // {
+    //     var workSheet = workBook.Worksheet(sheetNumber);
+    //     return workSheet.LastColumnUsed().ColumnNumber();
+    // }
+    // private int GetUsedCellColumnCount(int sheetNumber, XLWorkbook workBook)
+    // {
+    //     var workSheet = workBook.Worksheet(sheetNumber);
+    //     return workSheet.LastRowUsed().RowNumber();
+    // }
 
     /// <summary>
     /// 取得したExcelファイルの最大シート数
