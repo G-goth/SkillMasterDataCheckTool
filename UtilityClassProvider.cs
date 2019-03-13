@@ -1,13 +1,21 @@
+using System;
 using SkillMasterDataCheckTool;
 
-namespace SkillMasterDataCheckTool.UtilityClassProviders
+namespace UtilityClassProviders
 {
     public class UtilityClassProvider : IUtilityClassProvider
     {
-        private UtilityClass utility = new UtilityClass();
+        public void ITestMethod()
+        {
+            Console.WriteLine("Called!!");
+        }
         public bool GetArgumentZeroCheck(int num, int dPointPosition)
         {
-            return utility.ArgumentZeroCheck(num, dPointPosition);
+            return UtilityClass.ArgumentZeroCheck(num, dPointPosition);
+        }
+        public int GetAdvancedRoundINT(int num, int dPointPosition)
+        {
+            return UtilityClass.AdvancedRoundINT(num, dPointPosition);
         }
     }
 }

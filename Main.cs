@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ClosedXML.Excel;
 using SkillMasterDataCheckTool;
+using UtilityClassProviders;
 
 namespace SkillMasterDataCheckTool
 {
@@ -15,8 +16,10 @@ namespace SkillMasterDataCheckTool
         }
         static void Main(string[] args)
         {
-            if(utilityProvider.GetArgumentZeroCheck(12345, 2))
-            {}
+            // 疎結合をやってみるテスト
+            utilityProvider = new UtilityClassProvider();
+            utilityProvider.ITestMethod();
+
             IOCSV io = new IOCSV();
             IOFileName iof = new IOFileName();
             IOExcelFiles ioe = new IOExcelFiles();
