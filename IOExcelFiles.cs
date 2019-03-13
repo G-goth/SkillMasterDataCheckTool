@@ -3,16 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using ClosedXML.Excel;
 
-interface IIOExcelFiles
-{
-    List<int> GetExcelSheetNumberList(string fileName);
-    int GetExcelSheetNumberMax(string fileName);
-    string[][] ExtractionExcelData(int sheetNumber, XLWorkbook workBook);
-    // ClosedXML
-    XLWorkbook GetExcelObject(string fileName);
-}
-
-class IOExcelFiles : IIOExcelFiles
+class IOExcelFiles
 {
     public int ExcelSheetNumberProp{ set; get; }
     public XLWorkbook ExcelObjectProp{ set; get; }

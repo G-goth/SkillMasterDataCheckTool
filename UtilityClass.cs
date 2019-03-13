@@ -2,15 +2,10 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-interface IUtilityClass
-{
-    int AdvancedRoundINT(int num, int dPointPosition);
-    List<int> GenerateSerialNumber(int startNum, int endNum);
-}
-public class UtilityClass : IUtilityClass
+public class UtilityClass
 {
     static readonly int TEN = 10;
-    private bool ArgumentZeroCheck(int num, int dPointPosition)
+    public bool ArgumentZeroCheck(int num, int dPointPosition)
     {
         // 数値の桁数よりも四捨五入する位置が大きかったらfalseを返す
         if(((int)Math.Log10(num) + 1) <= dPointPosition) return false;
