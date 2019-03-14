@@ -12,8 +12,8 @@ namespace SkillMasterDataCheckTool
         }
         private ServiceLocatorProvider()
         {
-            Current = new ServiceLocator();
             // 依存関係を登録
+            Current = new ServiceLocator();
             Current.Register<IUtilityClassProvider>(new UtilityClassProvider());
         }
     }
