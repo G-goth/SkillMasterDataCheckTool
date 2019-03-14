@@ -17,8 +17,9 @@ namespace SkillMasterDataCheckTool
         static void Main(string[] args)
         {
             // 疎結合をやってみるテスト
-            // utilityProvider = new UtilityClassProvider();
-            // utilityProvider.ITestMethod();
+            utilityProvider = ServiceLocatorProvider.GetInstance.Current.Resolve<IUtilityClassProvider>();
+            utilityProvider.ITestMethod();
+
 
             IOCSV io = new IOCSV();
             IOFileName iof = new IOFileName();
