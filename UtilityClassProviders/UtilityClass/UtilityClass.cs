@@ -6,7 +6,7 @@ namespace SkillMasterDataCheckTool.UtilityClassProviders
 {
     public class UtilityClass
     {
-        static readonly int TEN = 10;
+        private static readonly int TEN = 10;
         private bool ArgumentZeroCheck(int num, int dPointPosition)
         {
             // 数値の桁数よりも四捨五入する位置が大きかったらfalseを返す
