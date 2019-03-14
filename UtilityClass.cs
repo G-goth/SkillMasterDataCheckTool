@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public static class UtilityClass
 {
     static readonly int TEN = 10;
-    public static bool ArgumentZeroCheck(int num, int dPointPosition)
+    private static bool ArgumentZeroCheck(int num, int dPointPosition)
     {
         // 数値の桁数よりも四捨五入する位置が大きかったらfalseを返す
         if(((int)Math.Log10(num) + 1) <= dPointPosition) return false;
