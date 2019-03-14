@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SkillMasterDataCheckTool
+namespace SkillMasterDataCheckTool.UtilityClassProviders
 {
     interface IUtilityClassProvider
     {
