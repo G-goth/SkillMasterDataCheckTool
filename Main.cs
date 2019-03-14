@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using ClosedXML.Excel;
-using SkillMasterDataCheckTool;
-using UtilityClassProviders;
+using SkillMasterDataCheckTool.UtilityClassProviders;
+using SkillMasterDataCheckTool.IOFiles.IOExcel;
+using SkillMasterDataCheckTool.IOFiles.IOCSV;
 
 namespace SkillMasterDataCheckTool
 {

@@ -1,4 +1,4 @@
-using UtilityClassProviders;
+using SkillMasterDataCheckTool.UtilityClassProviders;
 
 namespace SkillMasterDataCheckTool
 {

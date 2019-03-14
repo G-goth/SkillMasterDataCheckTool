@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using SkillMasterDataCheckTool;
+using SkillMasterDataCheckTool.UtilityClassProviders.UtilityClass;
 
-namespace UtilityClassProviders
+namespace SkillMasterDataCheckTool.UtilityClassProviders
 {
     public class UtilityClassProvider : IUtilityClassProvider
     {
@@ -12,11 +12,11 @@ namespace UtilityClassProviders
         }
         public int GetAdvancedRoundINT(int num, int dPointPosition)
         {
-            return UtilityClass.AdvancedRoundINT(num, dPointPosition);
+            return UtilityClass.UtilityClass.AdvancedRoundINT(num, dPointPosition);
         }
         public List<int> GetGenerateSerialNumber(int startNum, int endNum)
         {
-            return UtilityClass.GenerateSerialNumber(startNum, endNum);
+            return UtilityClass.UtilityClass.GenerateSerialNumber(startNum, endNum);
         }
     }
 }
