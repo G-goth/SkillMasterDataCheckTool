@@ -21,16 +21,14 @@ namespace SkillMasterDataCheckTool
             utilityProvider = ServiceLocatorProvider.GetInstance.Current.Resolve<IUtilityClassProvider>();
             utilityProvider.ITestMethod();
 
-            IOCSV io = new IOCSV();
-            IOFileName iof = new IOFileName();
-            IOExcelFiles ioe = new IOExcelFiles();
-
             // ファイルのフルパスの取得
+            IOFileName iof = new IOFileName();
             List<string> fileFullPath = new List<string>();
             fileFullPath.AddRange(iof.GetSpecifiedExtensionFileFullPath("xlsx"));
             // Console.WriteLine(iof.GetSpecifiedExtensionFileNameToList(fileFullPath)[0]);
             
             // Excelファイルの最大シート数を取得
+            IOExcelFiles ioe = new IOExcelFiles();
             int maxSheetNumber = ioe.GetExcelSheetNumberMax(fileFullPath[0]);
             // Excelファイルのシート数を連番で取得
             List<int> serialNumber = new List<int>(ioe.GetExcelSheetNumberList(fileFullPath[0]));
