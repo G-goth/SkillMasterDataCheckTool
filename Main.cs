@@ -20,7 +20,6 @@ namespace SkillMasterDataCheckTool
             utilityProvider = ServiceLocatorProvider.GetInstance.Current.Resolve<IUtilityClassProvider>();
             utilityProvider.ITestMethod();
 
-
             IOCSV io = new IOCSV();
             IOFileName iof = new IOFileName();
             IOExcelFiles ioe = new IOExcelFiles();
