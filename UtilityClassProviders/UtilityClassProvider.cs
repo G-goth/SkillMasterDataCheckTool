@@ -1,22 +1,23 @@
 using System;
 using System.Collections.Generic;
-using SkillMasterDataCheckTool.UtilityClassProviders.UtilityClass;
+using SkillMasterDataCheckTool.UtilityClassProviders;
 
 namespace SkillMasterDataCheckTool.UtilityClassProviders
 {
-    public class UtilityClassProvider : IUtilityClassProvider
+    public class UtilityClassProvider : UtilityClass, IUtilityClassProvider
     {
+        private UtilityClassProvider utilityProvider = new UtilityClassProvider();
         public void ITestMethod()
         {
             Console.WriteLine("Called!!");
         }
         public int GetAdvancedRoundINT(int num, int dPointPosition)
         {
-            return UtilityClass.UtilityClass.AdvancedRoundINT(num, dPointPosition);
+            return utilityProvider.AdvancedRoundINT(num, dPointPosition);
         }
         public List<int> GetGenerateSerialNumber(int startNum, int endNum)
         {
-            return UtilityClass.UtilityClass.GenerateSerialNumber(startNum, endNum);
+            return utilityProvider.GenerateSerialNumber(startNum, endNum);
         }
     }
 }

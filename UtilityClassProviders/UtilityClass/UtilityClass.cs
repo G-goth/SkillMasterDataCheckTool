@@ -2,12 +2,12 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace SkillMasterDataCheckTool.UtilityClassProviders.UtilityClass
+namespace SkillMasterDataCheckTool.UtilityClassProviders
 {
-    public static class UtilityClass
+    public class UtilityClass
     {
         static readonly int TEN = 10;
-        private static bool ArgumentZeroCheck(int num, int dPointPosition)
+        private bool ArgumentZeroCheck(int num, int dPointPosition)
         {
             // 数値の桁数よりも四捨五入する位置が大きかったらfalseを返す
             if(((int)Math.Log10(num) + 1) <= dPointPosition) return false;
@@ -16,7 +16,7 @@ namespace SkillMasterDataCheckTool.UtilityClassProviders.UtilityClass
             // いずれもマッチしなかったらtrue
             return true;
         }
-        public static int AdvancedRoundINT(int num, int dPointPosition)
+        protected int AdvancedRoundINT(int num, int dPointPosition)
         {
             if(ArgumentZeroCheck(num, dPointPosition) == false) return 0;
             else
@@ -24,7 +24,7 @@ namespace SkillMasterDataCheckTool.UtilityClassProviders.UtilityClass
                 return (int)(Math.Round(num / Math.Pow(TEN, dPointPosition)) * Math.Pow(TEN, dPointPosition));
             }
         }
-        public static List<int> GenerateSerialNumber(int startNum, int endNum)
+        protected List<int> GenerateSerialNumber(int startNum, int endNum)
         {
             return Enumerable.Repeat(++startNum, endNum).ToList();
         }
