@@ -12,7 +12,7 @@ namespace SkillMasterDataCheckTool
     class MainClass
     {
         private static IUtilityClassProvider utilityProvider;
-        public static void SetInputProvider(IUtilityClassProvider utility)
+        public static void SetUtilityClassProvider(IUtilityClassProvider utility)
         {
             utilityProvider = utility;
         }
