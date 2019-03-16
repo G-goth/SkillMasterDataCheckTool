@@ -1,6 +1,6 @@
 namespace SkillMasterDataCheckTool
 {
-    public class IOFilesProvider
+    public class IOFilesProvider : IIOFilesProvider
     {
     }
 }

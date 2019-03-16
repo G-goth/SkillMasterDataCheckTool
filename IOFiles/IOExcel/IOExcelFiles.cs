@@ -7,25 +7,6 @@ namespace SkillMasterDataCheckTool.IOFiles.IOExcel
 {
     class IOExcelFiles
     {
-        public int ExcelSheetNumberProp{ set; get; }
-        public XLWorkbook ExcelObjectProp{ set; get; }
-        private int GetUsedCellRowCountProp
-        {
-            get
-            {
-                var workSheet = ExcelObjectProp.Worksheet(ExcelSheetNumberProp);
-                return workSheet.LastColumnUsed().ColumnNumber();
-            }
-        }
-        private int GetUsedCellColumnCountProp
-        {
-            get
-            {
-                var workSheet = ExcelObjectProp.Worksheet(ExcelSheetNumberProp);
-                return workSheet.LastRowUsed().RowNumber();
-            }
-        }
-
         /// <summary>
         /// 取得したExcelファイルの最大シート数
         /// </summary>
