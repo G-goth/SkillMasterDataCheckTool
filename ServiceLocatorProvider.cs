@@ -5,7 +5,7 @@ namespace SkillMasterDataCheckTool
     public sealed class ServiceLocatorProvider
     {
         private static ServiceLocatorProvider _singleton = new ServiceLocatorProvider();
-        public ServiceLocator Current { get; private set; }
+        public ServiceLocator utilityCurrent { get; private set; }
         public static ServiceLocatorProvider GetInstance
         {
             get{ return _singleton; }
@@ -13,8 +13,8 @@ namespace SkillMasterDataCheckTool
         private ServiceLocatorProvider()
         {
             // 依存関係を登録
-            Current = new ServiceLocator();
-            Current.Register<IUtilityClassProvider>(new UtilityClassProvider());
+            utilityCurrent = new ServiceLocator();
+            utilityCurrent.Register<IUtilityClassProvider>(new UtilityClassProvider());
         }
     }
 }

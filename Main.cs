@@ -18,8 +18,8 @@ namespace SkillMasterDataCheckTool
         }
         static void Main(string[] args)
         {
-            // 疎結合をやってみるテスト
-            utilityProvider = ServiceLocatorProvider.GetInstance.Current.Resolve<IUtilityClassProvider>();
+            // UtilityClassで疎結合をやってみるテスト
+            utilityProvider = ServiceLocatorProvider.GetInstance.utilityCurrent.Resolve<IUtilityClassProvider>();
             utilityProvider.ITestMethod();
 
             // ファイルのフルパスの取得
