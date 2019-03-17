@@ -12,14 +12,14 @@ namespace SkillMasterDataCheckTool
     class MainClass
     {
         private static IUtilityClassProvider utilityProvider;
-        public static void SetInputProvider(IUtilityClassProvider utility)
+        public static void SetUtilityClassProvider(IUtilityClassProvider utility)
         {
             utilityProvider = utility;
         }
         static void Main(string[] args)
         {
-            // 疎結合をやってみるテスト
-            utilityProvider = ServiceLocatorProvider.GetInstance.Current.Resolve<IUtilityClassProvider>();
+            // UtilityClassで疎結合をやってみるテスト
+            utilityProvider = ServiceLocatorProvider.GetInstance.utilityCurrent.Resolve<IUtilityClassProvider>();
             utilityProvider.ITestMethod();
 
             // ファイルのフルパスの取得
