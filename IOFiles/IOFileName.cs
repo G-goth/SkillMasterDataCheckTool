@@ -5,7 +5,7 @@ using SkillMasterDataCheckTool.IIOFilesProviders;
 
 namespace SkillMasterDataCheckTool.IOFileNames
 {
-    class IOFileName : IIOFilesProvider
+    class IOFileName : IIOFileNamesProvider
     {
         /// <summary>
         /// 指定された拡張子のファイルのフルパスを検索して取得する。

@@ -2,10 +2,11 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using ClosedXML.Excel;
+using SkillMasterDataCheckTool.IIOFilesProviders;
 
 namespace SkillMasterDataCheckTool.IOFiles.IOExcel
 {
-    class IOExcelFiles
+    class IOExcelFiles : IIOExcelFilesProvider
     {
         /// <summary>
         /// 取得したExcelファイルの最大シート数
@@ -77,8 +78,24 @@ namespace SkillMasterDataCheckTool.IOFiles.IOExcel
         /// </summary>
         /// <param name="sheetNumber">シート番号(1から)</param>
         /// <param name="workBook">XLWorkbook変数</param>
+        /// <returns>使用しているExcelのセルのデータをstringの2次元配列で返す</returns>
+        public string[,] ExtractionExcelData(int sheetNumber, XLWorkbook workBook)
+        {
+            var workSheet = workBook.Worksheet(sheetNumber);
+            (int column, int row) xlCellAddress;
+            xlCellAddress.column = workSheet.LastColumnUsed().ColumnNumber();
+            xlCellAddress.row = workSheet.LastRowUsed().RowNumber();
+            string[,] xlStrDataArray = new string[xlCellAddress.column, xlCellAddress.row];
+            return xlStrDataArray;
+        }
+
+        /// <summary>
+        /// Excelのデータをセルごとに読み込んでジャグ配列に代入する
+        /// </summary>
+        /// <param name="sheetNumber">シート番号(1から)</param>
+        /// <param name="workBook">XLWorkbook変数</param>
         /// <returns>使用しているExcelのセルのデータをstringのジャグ配列で返す</returns>
-        public string[][] ExtractionExcelData(int sheetNumber, XLWorkbook workBook)
+        public string[][] ExtractionExcelDataJagged(int sheetNumber, XLWorkbook workBook)
         {
             var workSheet = workBook.Worksheet(sheetNumber);
             (int column, int row) xlCellAddress;
@@ -86,14 +103,14 @@ namespace SkillMasterDataCheckTool.IOFiles.IOExcel
             xlCellAddress.row = workSheet.LastRowUsed().RowNumber();
 
             // ジャグ配列にExcelのセルのデータを入れる
-            string[][] xlStrDataArray = new string[xlCellAddress.row][];
-            xlStrDataArray = Enumerable.Range(0, xlCellAddress.column)
+            string[][] xlStrDataJaggedArray = new string[xlCellAddress.row][];
+            xlStrDataJaggedArray = Enumerable.Range(0, xlCellAddress.column)
                 .Select(row => (new string[xlCellAddress.column]).Select(str => workSheet.Cell(1, 1).Value.ToString()).ToArray()).ToArray();
             
             string[][] xlStrDataArray2 = new string[xlCellAddress.row][];
             Console.WriteLine(workSheet.Cell("A1").Value.ToString());
-            Console.WriteLine(xlStrDataArray[0][0]);
-            return xlStrDataArray;
+            Console.WriteLine(xlStrDataJaggedArray[0][0]);
+            return xlStrDataJaggedArray;
         }
     }
 }
