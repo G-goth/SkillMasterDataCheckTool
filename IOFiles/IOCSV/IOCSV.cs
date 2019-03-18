@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using SkillMasterDataCheckTool.IIOFilesProviders;
 
 namespace SkillMasterDataCheckTool.IOFiles.IOCSV
 {
-    class IOCSV
+    class IOCSV : IIOCSVProvider
     {
         /// <summary>
         /// CSVファイルの読み込み
@@ -26,7 +27,7 @@ namespace SkillMasterDataCheckTool.IOFiles.IOCSV
                 Console.WriteLine(e);
             }
         }
-        private List<string[]> ExtractionCSV(StreamReader sr)
+        public List<string[]> ExtractionCSV(StreamReader sr)
         {
             string line;
             List<string[]> values = new List<string[]>();
