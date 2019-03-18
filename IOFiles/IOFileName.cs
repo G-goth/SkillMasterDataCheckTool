@@ -1,10 +1,11 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using SkillMasterDataCheckTool.IIOFilesProviders;
 
 namespace SkillMasterDataCheckTool.IOFileNames
 {
-    class IOFileName
+    class IOFileName : IIOFilesProvider
     {
         /// <summary>
         /// 指定された拡張子のファイルのフルパスを検索して取得する。
