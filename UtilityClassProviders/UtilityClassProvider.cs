@@ -8,7 +8,7 @@ namespace SkillMasterDataCheckTool.UtilityClassProviders
     {
         public void ITestMethod()
         {
-            Console.WriteLine("Called!!");
+            // Console.WriteLine("Called!!");
         }
         public int GetAdvancedRoundINT(int num, int dPointPosition)
         {

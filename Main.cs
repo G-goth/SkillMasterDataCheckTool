@@ -16,6 +16,7 @@ namespace SkillMasterDataCheckTool
         }
         static void Main(string[] args)
         {
+            
             // UtilityClassで疎結合をやってみるテスト
             utilityProvider = ServiceLocatorProvider.GetInstance.utilityCurrent.Resolve<IUtilityClassProvider>();
             utilityProvider.ITestMethod();
@@ -24,7 +25,7 @@ namespace SkillMasterDataCheckTool
             List<string> fileFullPath = new List<string>();
             ioFileNamesProvider = ServiceLocatorProvider.GetInstance.ioFileNameCurrent.Resolve<IIOFileNamesProvider>();
             fileFullPath.AddRange(ioFileNamesProvider.GetSpecifiedExtensionFileFullPath("xlsx"));
-            Console.WriteLine(ioFileNamesProvider.GetSpecifiedExtensionFileNameToList(fileFullPath)[0]);
+            // Console.WriteLine(ioFileNamesProvider.GetSpecifiedExtensionFileNameToList(fileFullPath)[0]);
             
             // Excelファイルの最大シート数を取得
             ioExcelFilesProvider = ServiceLocatorProvider.GetInstance.ioExcelFileCurrent.Resolve<IIOExcelFilesProvider>();
@@ -38,6 +39,11 @@ namespace SkillMasterDataCheckTool
             // {
             //     XLDataList.Add(ioe.ExtractionExcelData(xlFileCount, ioe.GetExcelObject(fileFullPath[xlFileCount -1])));
             // }
+
+            // ExcelファイルにステージIDとウェーブ数を書き込む
+            ReadExcelFiles readexcel = new ReadExcelFiles();
+            var sheet = ioExcelFilesProvider.GetExcelObject("test2.xlsx");
+            readexcel.GenerateStageAndWave(sheet);
         }
     }
 }

@@ -108,8 +108,8 @@ namespace SkillMasterDataCheckTool.IOFiles.IOExcel
                 .Select(row => (new string[xlCellAddress.column]).Select(str => workSheet.Cell(1, 1).Value.ToString()).ToArray()).ToArray();
             
             string[][] xlStrDataArray2 = new string[xlCellAddress.row][];
-            Console.WriteLine(workSheet.Cell("A1").Value.ToString());
-            Console.WriteLine(xlStrDataJaggedArray[0][0]);
+            // Console.WriteLine(workSheet.Cell("A1").Value.ToString());
+            // Console.WriteLine(xlStrDataJaggedArray[0][0]);
             return xlStrDataJaggedArray;
         }
     }
