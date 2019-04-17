@@ -56,6 +56,7 @@ namespace SkillMasterDataCheckTool
             ReadExcelFiles readexcel = new ReadExcelFiles();
             var sheet = ioExcelFilesProvider.GetExcelObject(fileNameList[keyValue - 1]);
             readexcel.GenerateStageAndWave(sheet, fileNameList[keyValue - 1]);
+            Console.WriteLine("なにかキーを押して終了・・・");
             Console.ReadKey();
         }
     }
