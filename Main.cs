@@ -16,7 +16,7 @@ namespace SkillMasterDataCheckTool
         }
         static void Main(string[] args)
         {
-            
+            Console.WriteLine("現在生成中・・・");
             // UtilityClassで疎結合をやってみるテスト
             utilityProvider = ServiceLocatorProvider.GetInstance.utilityCurrent.Resolve<IUtilityClassProvider>();
             utilityProvider.ITestMethod();
@@ -44,6 +44,7 @@ namespace SkillMasterDataCheckTool
             ReadExcelFiles readexcel = new ReadExcelFiles();
             var sheet = ioExcelFilesProvider.GetExcelObject("test2.xlsx");
             readexcel.GenerateStageAndWave(sheet, "test2.xlsx");
+            Console.ReadKey();
         }
     }
 }
