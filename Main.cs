@@ -49,6 +49,7 @@ namespace SkillMasterDataCheckTool
                 catch
                 {
                     Console.WriteLine("数字以外が押されました");
+                    fileCount = 0;
                     continue;
                 }
             }
