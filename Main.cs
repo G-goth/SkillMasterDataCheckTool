@@ -29,11 +29,10 @@ namespace SkillMasterDataCheckTool
 
             // ExcelファイルにステージIDとウェーブ数を書き込む
             ioExcelFilesProvider = ServiceLocatorProvider.GetInstance.ioExcelFileCurrent.Resolve<IIOExcelFilesProvider>();
-            var looping = true;
             int keyValue = 0;
             int fileCount = 0;
             List<int> fileCountList = new List<int>();
-            while(looping)
+            while(true)
             {
                 try
                 {
