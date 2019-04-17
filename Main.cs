@@ -43,7 +43,7 @@ namespace SkillMasterDataCheckTool
             // ExcelファイルにステージIDとウェーブ数を書き込む
             ReadExcelFiles readexcel = new ReadExcelFiles();
             var sheet = ioExcelFilesProvider.GetExcelObject("test2.xlsx");
-            readexcel.GenerateStageAndWave(sheet);
+            readexcel.GenerateStageAndWave(sheet, "test2.xlsx");
         }
     }
 }
