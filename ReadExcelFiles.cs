@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Diagnostics;
 using System.Linq;
 using System.Collections.Generic;
@@ -22,16 +23,23 @@ namespace SkillMasterDataCheckTool
             stageWave = Enumerable.Range(2, row1).Select(index => worksheet1.Cell(index, 2).GetValue<int>()).ToList();
             totalEnemies = Enumerable.Range(2, row1).Select(index => worksheet1.Cell(index, 3).GetValue<int>()).ToList();
 
-            // ここにロジック
+            // ステージIDとウェーブ数の組み合わせをList<(int, int)>に入れ込む
             List<(int id, int wave)> stageIDsTuple = new List<(int, int)>();
             for(int ids = 0; ids < stageIDs.Count; ++ids)
             {
-                var allocationAns = Math.Round((double)stageWave[ids] / (double)totalEnemies[ids] * 10);
-                for(int wave = 0; wave < allocationAns; ++wave)
+                var allocationAns = Math.Floor((double)totalEnemies[ids] / (double)stageWave[ids]);
+                for(int wave = 0; wave < stageWave[ids]; ++wave)
                 {
                     for(int allocation = 0; allocation <= allocationAns; ++allocation)
                     {
-                        stageIDsTuple.Add((stageIDs[ids], (wave + 1)));
+                        if(stageIDsTuple.Count(tuples => tuples.id == stageIDs[ids]) < totalEnemies[ids])
+                        {
+                            stageIDsTuple.Add((stageIDs[ids], (wave + 1)));
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
                 }
             }
